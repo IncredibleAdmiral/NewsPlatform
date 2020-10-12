@@ -8,7 +8,7 @@ namespace NewsTestPlatform.Data
 {
     public class Post
     {
-        public Guid Id { get; set; }
+       public Guid Id { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -19,6 +19,10 @@ namespace NewsTestPlatform.Data
         public string Annotation { get; set; }
         
         public DateTime CreateDate { get; set; }
+
+        public Guid NewsId { get; set; }
+
+        public News News { get; set; }
 
         public int AuthorId { get; set; }
         public Author Author { get; set; }

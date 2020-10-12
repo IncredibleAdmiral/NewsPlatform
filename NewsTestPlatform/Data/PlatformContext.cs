@@ -29,7 +29,7 @@ namespace NewsTestPlatform.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            // многие ко многим новости и темы
             modelBuilder.Entity<NewsTopics>()
            .HasKey(nt => new { nt.NewsId, nt.TopicName});
 
@@ -42,6 +42,8 @@ namespace NewsTestPlatform.Data
                 .HasOne(sc => sc.Topic)
                 .WithMany(c => c.NewsTopics)
                 .HasForeignKey(sc => sc.TopicName);
+
+            // многие ко многим посты и темы
 
             modelBuilder.Entity<PostsTopics>()
            .HasKey(pt => new { pt.PostId, pt.TopicName });
@@ -56,8 +58,26 @@ namespace NewsTestPlatform.Data
                 .WithMany(c => c.PostsTopics)
                 .HasForeignKey(sc => sc.TopicName);
 
+             // один к одному пост и новость
+            modelBuilder
+            .Entity<News>()
+            .HasOne(n => n.Post)
+            .WithOne(p => p.News)
+            .HasForeignKey<Post>(p => p.NewsId);
 
 
+            // один ко многим автор пост
+
+            modelBuilder.Entity<Post>()
+                .HasOne(a => a.Author)
+                .WithMany(p => p.Posts)
+                .HasForeignKey(sc => sc.AuthorId);
+            // один ко многим автор новость
+
+            modelBuilder.Entity<News>()
+                .HasOne(a => a.Author)
+                .WithMany(n => n.News)
+                .HasForeignKey(sc => sc.AuthorId);
 
         }
     }
