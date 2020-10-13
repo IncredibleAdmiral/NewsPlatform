@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,6 +9,8 @@ namespace NewsTestPlatform.Data
 {
     public class News
     {
+       [Key]
+        
         public Guid Id { get; set; }
 
         [Required]
@@ -21,10 +24,10 @@ namespace NewsTestPlatform.Data
         public Post Post { get; set; }
 
 
-        public int AuthorId{ get; set; }
+        //public int AuthorId{ get; set; }
         public Author Author { get; set; }
-      
+
         public List<NewsTopics> NewsTopics { get; set; }
 
-}
+    }
 }
