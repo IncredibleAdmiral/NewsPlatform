@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NewsTestPlatform.Interfaces;
+using NewsTestPlatform.Models.DataBaseWork;
 
 namespace NewsTestPlatform
 {
@@ -20,6 +22,8 @@ namespace NewsTestPlatform
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddTransient<INewsPostsGetter, NewsPostsGetter>();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

@@ -18,9 +18,11 @@ namespace NewsTestPlatform.Data
         public string Name { get; set; }
 
         [Required]
-        [StringLength(100)]
+        [StringLength(200)]
         public string Annotation { get; set; }
-        
+
+        public Author Author { get; set; }
+        public int AuthorId { get; set; }
 
         public DateTime CreateDate { get; set; }
 
@@ -30,7 +32,7 @@ namespace NewsTestPlatform.Data
 
 
         //public int AuthorId { get; set; }
-        public Author Author { get; set; }
+        
 
         public List<PostsTopics> PostsTopics { get; set; }
     }

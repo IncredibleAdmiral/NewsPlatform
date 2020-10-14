@@ -17,7 +17,10 @@ namespace NewsTestPlatform.Data
         public  DbSet<Post> Posts { get; set; }        
         public  DbSet<Topic> Topics { get; set; }
 
-       
+        public DbSet<PostsTopics> PostsTopics { get; set; }
+        public DbSet<NewsTopics> NewsTopics { get; set; }
+
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -75,14 +78,14 @@ namespace NewsTestPlatform.Data
 
 
 
-            //// один ко многим автор пост
+            // один ко многим автор пост
 
-            //modelBuilder.Entity<Post>()
-            //    .HasOne(a => a.Author)
-            //    .WithMany(p => p.Posts)
-            //    .HasForeignKey(sc => sc.AuthorId);
+            modelBuilder.Entity<Post>()
+                .HasOne(a => a.Author)
+                .WithMany(p => p.Posts)
+                .HasForeignKey(sc => sc.AuthorId);
 
-            //// один ко многим автор новость
+            // один ко многим автор новость
 
             //modelBuilder.Entity<News>()
             //    .HasOne(a => a.Author)
