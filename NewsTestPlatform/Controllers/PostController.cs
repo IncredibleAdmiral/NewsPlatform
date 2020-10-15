@@ -16,17 +16,35 @@ namespace NewsTestPlatform.Controllers
     {
 
 
-        readonly INewsPostsGetter getter;
+        private readonly INewsPostsGetter getter;
         private readonly ILogger logger;
+        private readonly INewsWriter writer;
 
-
-        public PostController(INewsPostsGetter getter, ILogger<PostController> logger)
+        public PostController(INewsPostsGetter getter, ILogger<PostController> logger, INewsWriter writer)
         {
 
             this.getter = getter;
             this.logger = logger;
+            this.writer = writer;
         }
 
+        
+        
+        
+   
+        public void AddNews(int authorId, string newsName, string text, string annotaion, List<string> topicList)
+        {
+            writer.WriteDownNewsToBase(authorId, newsName, text, annotaion, topicList);
+        }
+
+        public void DeleteNews(string id)
+        {
+            writer.DeleteNews(id);
+        }
+
+    
+
+        [HttpGet]
         public ViewNewsModel GetNewsById(string id)
         {
             try
@@ -50,11 +68,13 @@ namespace NewsTestPlatform.Controllers
 
         }
 
+        [HttpGet]
         public List<ViewPostModel> GetPosts(int skipPosts)
         {
             return getter.GetPosts(skipPosts);
         }
 
+        [HttpGet]
         public ViewPostModel GetPostById(string id)
         {
             try
@@ -76,6 +96,7 @@ namespace NewsTestPlatform.Controllers
             }
         }
 
+        [HttpGet]
         public List<ViewPostModel> GetPostsByTopic(string genre, int skipPosts)
         {
 

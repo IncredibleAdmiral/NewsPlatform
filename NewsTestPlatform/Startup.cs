@@ -23,7 +23,12 @@ namespace NewsTestPlatform
         {
             services.AddControllersWithViews();
 
+
+            services.AddTransient<INewsWriter, NewsWriter>();
             services.AddTransient<INewsPostsGetter, NewsPostsGetter>();
+
+            
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
