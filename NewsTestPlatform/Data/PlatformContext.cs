@@ -10,7 +10,11 @@ namespace NewsTestPlatform.Data
 {
     public class PlatformContext : DbContext
     {
-  
+
+        public PlatformContext(DbContextOptions<PlatformContext> options):base(options)
+        { 
+        
+        }
 
         public  DbSet<Author> Authors { get; set; }
         public  DbSet<News> News { get; set; }       
@@ -22,13 +26,13 @@ namespace NewsTestPlatform.Data
 
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
             
             
-                optionsBuilder.UseSqlServer("Data Source = Admiral\\SQLEXPRESS; Initial Catalog = NewsPlatformBase; Integrated Security = True");
+        //        optionsBuilder.UseSqlServer("Data Source = Admiral\\SQLEXPRESS; Initial Catalog = NewsPlatformBase; Integrated Security = True");
             
-        }
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

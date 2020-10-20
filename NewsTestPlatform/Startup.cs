@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NewsTestPlatform.Data;
 using NewsTestPlatform.Interfaces;
 using NewsTestPlatform.Models.DataBaseWork;
 
@@ -26,7 +28,8 @@ namespace NewsTestPlatform
 
             services.AddTransient<INewsWriter, NewsWriter>();
             services.AddTransient<INewsPostsGetter, NewsPostsGetter>();
-
+            services.AddDbContext<PlatformContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("NewsConnectionString")));
             
 
             // In production, the Angular files will be served from this directory

@@ -17,9 +17,9 @@ namespace NewsTestPlatform.Models.DataBaseWork
         private readonly PlatformContext context;
         private readonly ILogger logger;
             
-        public NewsWriter(ILogger logger)
+        public NewsWriter(ILogger<NewsWriter> logger, PlatformContext context )
         {
-            context = new PlatformContext();
+            this.context = context;
             this.logger = logger;
         }
 
